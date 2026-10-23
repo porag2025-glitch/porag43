@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Porag43 — AI & Web Developer | Fast, Affordable Websites</title>
+<meta name="description" content="Porag43 — AI & Web Developer in Pakundia, Kishoreganj, Bangladesh. Fast, affordable, mobile-first websites for coaching centers, online stores and personal brands.">
+
+<!-- Set theme before paint (no flash) -->
+<script>
+(function(){try{
+  var t = localStorage.getItem('p43-theme');
+  if(!t){ t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; }
+  document.documentElement.setAttribute('data-theme', t);
+}catch(e){ document.documentElement.setAttribute('data-theme','dark'); }})();
+</script>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23B7F35A'/%3E%3Ctext x='50' y='68' font-size='52' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%230B0E0C'%3EP4%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<style>
+@theme inline {
+  --color-bg: var(--bg);
+  --color-soft: var(--bg-soft);
+  --color-card: var(--bg-card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-acctxt: var(--acc-text);
+  --color-wa: #25D366;
+  --font-display: "Unbounded", system-ui, sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root{
+  --bg:#0B0E0C; --bg-soft:#10140F; --bg-card:#141A14;
+  --ink:#E9EEE7; --muted:#98A396; --line:rgba(233,238,231,.13);
+  --accent:#B7F35A; --acc-text:#B7F35A; --on-accent:#0B1203;
+  --glow:rgba(183,243,90,.14);
+  --shadow-card:0 18px 50px -20px rgba(0,0,0,.65);
+  color-scheme:dark;
+}
+[data-theme="light"]{
+  --bg:#F2F4EC; --bg-soft:#E9EDE2; --bg-card:#FBFCF8;
+  --ink:#151A14; --muted:#5C675B; --line:rgba(21,26,20,.15);
+  --accent:#47820A; --acc-text:#47820A; --on-accent:#F4F7EE;
+  --glow:rgba(71,130,10,.16);
+  --shadow-card:0 18px 45px -22px rgba(40,60,20,.25);
+  color-scheme:light;
+}
+
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background .4s ease, color .4s ease;
+}
+::selection{ background:var(--accent); color:var(--on-accent); }
+section{ scroll-margin-top:5.5rem; }
+
+.wrap{ max-width:72rem; margin-inline:auto; padding-inline:1.25rem; }
+@media(min-width:768px){ .wrap{ padding-inline:2rem; } }
+
+/* ---------- noise overlay ---------- */
+.noise{
+  position:fixed; inset:-50%; z-index:70; pointer-events:none; opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 9s steps(6) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)} 20%{transform:translate(-2%,3%)}
+  40%{transform:translate(3%,-2%)} 60%{transform:translate(-3%,-3%)} 80%{transform:translate(2%,2%)}
+}
+[data-theme="light"] .noise{ opacity:.06; }
+
+/* ---------- scroll progress ---------- */
+#progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent); z-index:100; }
+
+/* ---------- header ---------- */
+#header{ transition:background .35s ease, border-color .35s ease, backdrop-filter .35s; border-bottom:1px solid transparent; }
+#header.scrolled{ background:color-mix(in oklab, var(--bg) 82%, transparent); backdrop-filter:blur(14px); border-bottom-color:var(--line); }
+.logo-cursor{ display:inline-block; width:.5em; height:.9em; background:var(--accent); margin-left:.14em; animation:blink 1.1s steps(1) infinite; vertical-align:baseline; }
+@keyframes blink{ 50%{opacity:0} }
+
+.nav-link{ position:relative; font-size:.92rem; font-weight:500; color:var(--muted); transition:color .25s; }
+.nav-link::after{ content:""; position:absolute; left:0; bottom:-4px; height:2px; width:100%; background:var(--accent); transform:scaleX(0); transform-origin:right; transition:transform .35s cubic-bezier(.22,1,.36,1); }
+.nav-link:hover{ color:var(--ink); }
+.nav-link:hover::after{ transform:scaleX(1); transform-origin:left; }
+
+/* theme icon swap */
+.ic-sun{ display:none; }
+[data-theme="light"] .ic-sun{ display:block; }
+[data-theme="light"] .ic-moon{ display:none; }
+
+/* ---------- buttons ---------- */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:.6rem; font-weight:600; border-radius:.8rem; padding:.85rem 1.5rem; transition:transform .25s ease, box-shadow .25s ease, background .25s, border-color .25s, color .25s; cursor:pointer; white-space:nowrap; }
+.btn:active{ transform:scale(.97); }
+.btn-wa{ background:var(--accent); color:var(--on-accent); }
+.btn-wa:hover{ transform:translateY(-2px); box-shadow:0 14px 34px -10px var(--glow); }
+.btn-ghost{ border:1px solid var(--line); color:var(--ink); background:transparent; }
+.btn-ghost:hover{ border-color:var(--accent); color:var(--acctxt); transform:translateY(-2px); }
+.btn-sm{ padding:.6rem 1.05rem; font-size:.9rem; border-radius:.65rem; }
+
+/* ---------- hero ---------- */
+.hero-grid-bg{
+  position:absolute; inset:0; pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:54px 54px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 25%, transparent 78%);
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 25%, transparent 78%);
+}
+.hero-glow{ position:absolute; top:-160px; right:-120px; width:560px; height:560px; border-radius:50%; background:radial-gradient(circle, var(--glow), transparent 65%); pointer-events:none; }
+
+h1 .scr{ display:block; }
+h1 .scr-accent{ color:var(--acctxt); }
+
+/* ---------- terminal ---------- */
+.terminal{
+  --acc-term:#B7F35A;
+  background:#0C110D; border:1px solid rgba(183,243,90,.22); border-radius:1rem;
+  box-shadow:var(--shadow-card), 0 0 80px -30px var(--glow);
+  font-family:var(--font-mono); font-size:.8rem; line-height:1.75;
+  color:#C9D6C4; position:relative;
+}
+.terminal::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(180deg, rgba(183,243,90,.05), transparent 30%);
+}
+.term-head{ display:flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border-bottom:1px solid rgba(183,243,90,.14); }
+.term-dot{ width:.62rem; height:.62rem; border-radius:50%; }
+.term-title{ margin-left:auto; font-size:.68rem; color:#6E7C6A; letter-spacing:.05em; }
+.term-body{ padding:1.1rem 1.2rem 1.4rem; min-height:288px; }
+.t-cmd{ color:#E9EEE7; }
+.t-cmd::before{ content:"$ "; color:var(--acc-term); }
+.t-ok{ color:#8FA08B; } .t-ok b{ color:var(--acc-term); font-weight:500; }
+.t-hl{ color:#8FA08B; } .t-hl b{ color:#FFD479; font-weight:500; }
+.t-live{ color:var(--acc-term); }
+.t-out{ color:#E9EEE7; margin-top:.35rem; }
+.t-cursor{ display:inline-block; width:.6em; height:1em; background:var(--acc-term); vertical-align:-.15em; animation:blink 1s steps(1) infinite; }
+
+.float-chip{
+  position:absolute; background:var(--bg-card); border:1px solid var(--line);
+  border-radius:.8rem; padding:.6rem .9rem; font-family:var(--font-mono); font-size:.72rem;
+  box-shadow:var(--shadow-card); display:flex; align-items:center; gap:.5rem;
+  animation:floaty 5.5s ease-in-out infinite;
+}
+@keyframes floaty{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+
+/* ---------- ticker ---------- */
+.ticker{ border-block:1px solid var(--line); background:var(--bg-soft); overflow:hidden; }
+.ticker-track{ display:flex; width:max-content; animation:marquee 30s linear infinite; }
+.ticker:hover .ticker-track{ animation-play-state:paused; }
+.ticker-item{ display:flex; align-items:center; gap:2.4rem; padding:.85rem 1.2rem .85rem 0; font-family:var(--font-mono); font-size:.8rem; letter-spacing:.18em; color:var(--muted); }
+.ticker-item i{ color:var(--accent); font-style:normal; }
+@keyframes marquee{ to{ transform:translateX(-50%);} }
+
+/* ---------- section headers ---------- */
+.kicker{ font-family:var(--font-mono); font-size:.75rem; letter-spacing:.28em; text-transform:uppercase; color:var(--acctxt); display:inline-flex; align-items:center; gap:.7rem; }
+.kicker::before{ content:""; width:2rem; height:1px; background:var(--accent); }
+.sec-title{ font-family:var(--font-display); font-weight:700; letter-spacing:-.01em; line-height:1.06; font-size:clamp(1.7rem, 3.8vw, 2.7rem); margin-top:1rem; }
+.sec-sub{ color:var(--muted); max-width:34rem; margin-top:1rem; font-size:1.02rem; }
+
+/* line-mask reveal */
+.mask-line{ display:block; overflow:hidden; }
+.mask-line > span{ display:block; transform:translateY(112%); transition:transform 1s cubic-bezier(.22,1,.36,1); transition-delay:var(--d,0s); }
+.is-in .mask-line > span{ transform:translateY(0); }
+
+/* generic reveal */
+[data-reveal]{ opacity:0; transform:translateY(26px); transition:opacity .8s ease, transform .8s cubic-bezier(.22,1,.36,1); transition-delay:var(--d,0s); }
+[data-reveal].is-in{ opacity:1; transform:none; }
+
+/* ---------- cards ---------- */
+.card{ background:var(--bg-card); border:1px solid var(--line); border-radius:1.1rem; transition:transform .35s ease, border-color .35s, box-shadow .35s; }
+.card-hover:hover{ transform:translateY(-5px); border-color:color-mix(in oklab, var(--accent) 45%, var(--line)); box-shadow:var(--shadow-card); }
+.chip{ display:inline-flex; align-items:center; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.08em; padding:.3rem .65rem; border:1px solid var(--line); border-radius:999px; color:var(--muted); }
+.chip-acc{ color:var(--acctxt); border-color:color-mix(in oklab, var(--accent) 50%, transparent); background:color-mix(in oklab, var(--accent) 10%, transparent); }
+
+/* services */
+.svc-ico{ width:2.9rem; height:2.9rem; border-radius:.8rem; display:grid; place-items:center; background:color-mix(in oklab, var(--accent) 12%, transparent); color:var(--acctxt); border:1px solid color-mix(in oklab, var(--accent) 28%, transparent); transition:transform .35s ease, background .35s; }
+.card-hover:hover .svc-ico{ transform:rotate(-6deg) scale(1.06); background:var(--accent); color:var(--on-accent); }
+
+/* portfolio */
+.proj-img-wrap{ overflow:hidden; border-radius:.85rem; position:relative; }
+.proj-img-wrap img{ width:100%; height:100%; object-fit:cover; transition:transform 1.1s cubic-bezier(.22,1,.36,1); }
+.group:hover .proj-img-wrap img{ transform:scale(1.06); }
+.proj-badge{ position:absolute; top:.8rem; left:.8rem; background:rgba(11,14,12,.75); backdrop-filter:blur(6px); color:var(--accent); font-family:var(--font-mono); font-size:.66rem; letter-spacing:.1em; padding:.32rem .6rem; border-radius:.45rem; border:1px solid rgba(183,243,90,.35); }
+.view-btn{ font-weight:600; font-size:.92rem; color:var(--acctxt); display:inline-flex; align-items:center; gap:.45rem; }
+.view-btn svg{ transition:transform .3s ease; }
+.view-btn:hover svg{ transform:translateX(5px); }
+.dashed-card{ border:1.5px dashed color-mix(in oklab, var(--accent) 40%, var(--line)); background:color-mix(in oklab, var(--accent) 4%, transparent); border-radius:1.1rem; transition:border-color .3s, background .3s; }
+.dashed-card:hover{ border-color:var(--accent); background:color-mix(in oklab, var(--accent) 8%, transparent); }
+
+/* process steps */
+.step{ position:relative; padding:0 0 2.4rem 3.2rem; }
+.step::before{ content:""; position:absolute; left:.85rem; top:1.6rem; bottom:.4rem; width:1px; background:var(--line); }
+.step:last-child::before{ display:none; }
+.step-num{ position:absolute; left:0; top:0; width:1.75rem; height:1.75rem; border-radius:50%; background:var(--bg-card); border:1px solid var(--line); display:grid; place-items:center; font-family:var(--font-mono); font-size:.7rem; color:var(--acctxt); }
+.step:hover .step-num{ background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+.step-day{ font-family:var(--font-mono); font-size:.7rem; letter-spacing:.15em; color:var(--acctxt); }
+
+/* pricing */
+.price-card{ display:flex; flex-direction:column; }
+.price-card.popular{ border-color:var(--accent); box-shadow:0 0 60px -25px var(--glow); }
+.badge-pop{ position:absolute; top:-0.85rem; left:50%; transform:translateX(-50%); background:var(--accent); color:var(--on-accent); font-family:var(--font-mono); font-size:.66rem; font-weight:700; letter-spacing:.14em; padding:.38rem .9rem; border-radius:999px; white-space:nowrap; }
+.price-amount{ font-family:var(--font-display); font-weight:700; font-size:2.5rem; letter-spacing:-.02em; display:inline-block; }
+.price-amount.flip{ animation:flipIn .35s ease; }
+@keyframes flipIn{ from{ transform:translateY(10px); opacity:0; } }
+.cur-btn{ font-family:var(--font-mono); font-size:.78rem; padding:.45rem 1rem; border-radius:999px; border:1px solid var(--line); color:var(--muted); cursor:pointer; transition:all .25s; }
+.cur-btn.active{ background:var(--accent); color:var(--on-accent); border-color:var(--accent); font-weight:700; }
+.feat{ display:flex; gap:.65rem; font-size:.93rem; color:var(--muted); align-items:flex-start; }
+.feat svg{ flex:none; margin-top:.22rem; color:var(--acctxt); }
+.addon{ display:flex; justify-content:space-between; gap:1rem; font-size:.9rem; color:var(--muted); padding:.6rem 0; border-bottom:1px dashed var(--line); }
+.addon b{ color:var(--ink); font-family:var(--font-mono); font-weight:500; font-size:.85rem; white-space:nowrap; }
+
+/* testimonials */
+.tst{ transform:rotate(var(--rot,0deg)); }
+.tst:hover{ transform:rotate(0deg) translateY(-5px); }
+.stars{ color:var(--acctxt); letter-spacing:.15em; font-size:.85rem; }
+.tst-ava{ width:2.7rem; height:2.7rem; border-radius:50%; display:grid; place-items:center; font-family:var(--font-mono); font-size:.8rem; font-weight:700; background:color-mix(in oklab, var(--accent) 16%, transparent); color:var(--acctxt); border:1px solid color-mix(in oklab, var(--accent) 35%, transparent); }
+
+/* faq */
+.faq-item{ border:1px solid var(--line); border-radius:.95rem; background:var(--bg-card); overflow:hidden; transition:border-color .3s; }
+.faq-item.open{ border-color:color-mix(in oklab, var(--accent) 50%, var(--line)); }
+.faq-q{ width:100%; display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.15rem 1.3rem; text-align:left; font-weight:600; font-size:1rem; cursor:pointer; }
+.faq-q .plus{ flex:none; width:1.6rem; height:1.6rem; border-radius:50%; border:1px solid var(--line); display:grid; place-items:center; transition:transform .4s cubic-bezier(.22,1,.36,1), background .3s, color .3s; color:var(--acctxt); }
+.faq-item.open .plus{ transform:rotate(135deg); background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+.faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1); }
+.faq-item.open .faq-a{ grid-template-rows:1fr; }
+.faq-a > div{ overflow:hidden; }
+.faq-a p{ padding:0 1.3rem 1.25rem; color:var(--muted); font-size:.95rem; }
+
+/* contact */
+.contact-glow{ position:absolute; inset:0; border-radius:inherit; background:radial-gradient(600px 300px at 15% 0%, var(--glow), transparent 70%); pointer-events:none; }
+.field{ width:100%; background:var(--bg-soft); border:1px solid var(--line); border-radius:.75rem; padding:.85rem 1rem; font-family:var(--font-body); font-size:.95rem; color:var(--ink); transition:border-color .25s, box-shadow .25s; }
+.field:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--glow); }
+.field::placeholder{ color:var(--muted); }
+select.field{ appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2398A396' stroke-width='2' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; }
+
+/* availability pulse */
+.pulse-dot{ position:relative; width:.6rem; height:.6rem; border-radius:50%; background:var(--accent); }
+.pulse-dot::after{ content:""; position:absolute; inset:-4px; border-radius:50%; border:1px solid var(--accent); animation:ping 1.8s ease-out infinite; }
+@keyframes ping{ 0%{ transform:scale(.6); opacity:1; } 100%{ transform:scale(1.8); opacity:0; } }
+
+/* modal */
+.modal{ position:fixed; inset:0; z-index:90; display:grid; place-items:center; padding:1rem; opacity:0; pointer-events:none; transition:opacity .3s ease; }
+.modal.open{ opacity:1; pointer-events:auto; }
+.modal-backdrop{ position:absolute; inset:0; background:rgba(5,8,5,.72); backdrop-filter:blur(8px); }
+.modal-panel{ position:relative; width:100%; max-width:46rem; max-height:88vh; overflow-y:auto; background:var(--bg-card); border:1px solid var(--line); border-radius:1.2rem; box-shadow:var(--shadow-card); transform:translateY(24px) scale(.97); transition:transform .4s cubic-bezier(.22,1,.36,1); }
+.modal.open .modal-panel{ transform:none; }
+.modal-x{ position:absolute; top:.8rem; right:.8rem; z-index:2; width:2.4rem; height:2.4rem; border-radius:50%; display:grid; place-items:center; background:var(--bg-soft); border:1px solid var(--line); color:var(--ink); cursor:pointer; transition:all .25s; }
+.modal-x:hover{ background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+
+/* back to top */
+#toTop{ position:fixed; bottom:1.4rem; right:1.4rem; z-index:60; width:2.9rem; height:2.9rem; border-radius:50%; display:grid; place-items:center; background:var(--accent); color:var(--on-accent); cursor:pointer; opacity:0; transform:translateY(14px); pointer-events:none; transition:all .35s ease; box-shadow:0 10px 28px -8px var(--glow); }
+#toTop.show{ opacity:1; transform:none; pointer-events:auto; }
+#toTop:hover{ transform:translateY(-3px); }
+
+/* ---------- page router / wipe ---------- */
+#wipe{
+  position:fixed; inset:0; z-index:95; background:var(--accent); pointer-events:none;
+  transform:scaleY(0); transform-origin:bottom;
+  transition:transform .3s cubic-bezier(.76,0,.24,1);
+}
+#wipe.on{ transform:scaleY(1); transform-origin:top; }
+.nav-link.active{ color:var(--ink); }
+.nav-link.active::after{ transform:scaleX(1); transform-origin:left; }
+.page-in{ animation:pageIn .5s cubic-bezier(.22,1,.36,1) both; }
+@keyframes pageIn{ from{ opacity:0; transform:translateY(16px); } }
+@media (prefers-reduced-motion: reduce){ #wipe{ display:none; } .page-in{ animation:none; } }
+
+/* mobile nav */
+#mobileNav{ max-height:0; overflow:hidden; transition:max-height .5s cubic-bezier(.22,1,.36,1); background:color-mix(in oklab, var(--bg) 92%, transparent); backdrop-filter:blur(16px); }
+#mobileNav.open{ max-height:22rem; }
+.navbar-burger span{ display:block; width:1.35rem; height:2px; background:var(--ink); border-radius:2px; transition:transform .35s ease, opacity .3s; }
+.navbar-burger span + span{ margin-top:5px; }
+.navbar-burger.open span:first-child{ transform:translateY(3.5px) rotate(45deg); }
+.navbar-burger.open span:last-child{ transform:translateY(-3.5px) rotate(-45deg); }
+
+/* tilt cards */
+[data-tilt]{ will-change:transform; }
+
+/* reduced motion: kill everything that moves */
+@media (prefers-reduced-motion: reduce){
+  .noise, .ticker-track, .float-chip, .pulse-dot::after, .logo-cursor, .t-cursor{ animation:none !important; }
+  [data-reveal]{ opacity:1 !important; transform:none !important; transition:none !important; }
+  .mask-line > span{ transform:none !important; transition:none !important; }
+  .card-hover:hover, .btn:hover, .proj-img-wrap img, .svc-ico{ transition:none !important; transform:none !important; }
+  .tst{ transform:none !important; }
+  .modal, .modal-panel, .faq-a, #toTop{ transition-duration:.01ms !important; }
+}
+</style>
+</head>
+
+<body class="font-body">
+
+<div class="noise" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
+<div id="wipe" aria-hidden="true"></div>
+
+<!-- ================= HEADER ================= -->
+<header id="header" class="fixed top-0 inset-x-0 z-50">
+  <div class="wrap flex items-center justify-between h-[4.4rem]">
+    <div class="flex items-center gap-3">
+      <a href="#/home" class="font-display font-bold text-lg tracking-tight select-none" aria-label="Porag43 home">
+        Porag<span class="text-accent">43</span><span class="logo-cursor" aria-hidden="true"></span>
+      </a>
+      <span id="crumb" class="hidden sm:block font-mono text-[.72rem] text-muted border-l border-line pl-3">~/home</span>
+    </div>
+
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Main">
+      <a class="nav-link" href="#/home">Home</a>
+      <a class="nav-link" href="#/services">Services</a>
+      <a class="nav-link" href="#/work">Work</a>
+      <a class="nav-link" href="#/pricing">Pricing</a>
+      <a class="nav-link" href="#/contact">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-2.5">
+      <button id="themeToggle" class="w-10 h-10 grid place-items-center rounded-lg border border-line text-muted hover:text-accent hover:border-accent transition-colors" aria-label="Toggle dark / light mode" title="Toggle theme">
+        <svg class="ic-moon w-[1.15rem] h-[1.15rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ic-sun w-[1.2rem] h-[1.2rem]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+
+      <a class="btn btn-wa btn-sm hidden sm:inline-flex" data-wa="Hi Porag! I found your site and I want to talk about a website for my business.">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+
+      <button id="menuBtn" class="navbar-burger lg:hidden w-10 h-10 grid place-items-center border border-line rounded-lg" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- mobile nav -->
+  <div id="mobileNav" class="lg:hidden border-b border-line">
+    <nav class="wrap py-5 flex flex-col gap-4" aria-label="Mobile">
+      <a class="nav-link text-base" href="#/home">Home</a>
+      <a class="nav-link text-base" href="#/services">Services</a>
+      <a class="nav-link text-base" href="#/work">Work</a>
+      <a class="nav-link text-base" href="#/pricing">Pricing</a>
+      <a class="nav-link text-base" href="#/contact">Contact</a>
+      <a class="btn btn-wa btn-sm mt-2" data-wa="Hi Porag! I found your site and I want to talk about a website for my business.">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Start on WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section data-page="home" class="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden">
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="wrap relative grid lg:grid-cols-[1.05fr_.95fr] gap-14 lg:gap-10 items-center">
+      <!-- left -->
+      <div>
+        <div class="inline-flex items-center gap-2.5 border border-line rounded-full px-4 py-1.5 bg-soft" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span class="font-mono text-[.72rem] tracking-[.14em] uppercase text-muted">Accepting 2 new projects · Feb 2026</span>
+        </div>
+
+        <p class="font-mono text-accent text-xs md:text-sm tracking-[.22em] mt-7" data-reveal style="--d:.08s">
+          &lt;AI-POWERED / HAND-FINISHED&gt; — I'M PORAG
+        </p>
+
+        <h1 class="font-display font-bold mt-4 leading-[1.04] tracking-tight" style="font-size:clamp(2.1rem, 5.6vw, 4.1rem)">
+          <span class="scr" data-scramble="WEBSITES THAT">WEBSITES THAT</span>
+          <span class="scr scr-accent" data-scramble="TURN BROWSERS">TURN BROWSERS</span>
+          <span class="scr" data-scramble="INTO CUSTOMERS.">INTO CUSTOMERS.</span>
+        </h1>
+
+        <p class="mt-6 text-muted text-base md:text-lg leading-relaxed max-w-xl" data-reveal style="--d:.2s">
+          I'm <strong class="text-ink font-semibold">Porag</strong> — an AI-assisted web developer building
+          <strong class="text-ink font-semibold">fast, affordable, mobile-first websites</strong> for small businesses.
+          Coaching centers, shops, studios, personal brands. Priced in taka, shipped in days,
+          supported on one WhatsApp chat.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3.5" data-reveal style="--d:.3s">
+          <a class="btn btn-wa" data-wa="Hi Porag! I want to build a website for my business. Can we talk?">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Start a project on WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#/work">
+            See my work
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m0 0 6-6m-6 6-6-6"/></svg>
+          </a>
+        </div>
+
+        <!-- stats -->
+        <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-xl" data-reveal style="--d:.4s">
+          <div>
+            <p class="font-display font-bold text-2xl md:text-3xl"><span data-count="42" data-suffix="+">0</span></p>
+            <p class="text-muted text-sm mt-1">Sites launched</p>
+          </div>
+          <div>
+            <p class="font-display font-bold text-2xl md:text-3xl"><span data-count="5" data-suffix="d">0</span></p>
+            <p class="text-muted text-sm mt-1">Avg. delivery</p>
+          </div>
+          <div>
+            <p class="font-display font-bold text-2xl md:text-3xl"><span data-count="4.9" data-dec="1" data-suffix="★">0</span></p>
+            <p class="text-muted text-sm mt-1">Client rating</p>
+          </div>
+          <div>
+            <p class="font-display font-bold text-2xl md:text-3xl"><span data-count="98" data-suffix="/100">0</span></p>
+            <p class="text-muted text-sm mt-1">Lighthouse score</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- right: terminal -->
+      <div class="relative" data-reveal style="--d:.25s">
+        <div class="float-chip -top-5 -right-2 md:-right-6" aria-hidden="true" style="animation-delay:-1.5s">
+          <svg class="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          0.8s LCP · sub-second loads
+        </div>
+        <div class="float-chip -bottom-6 -left-2 md:-left-8" aria-hidden="true">
+          <svg class="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          5 days → live · BDT 4,000
+        </div>
+
+        <div class="terminal" role="img" aria-label="Animated terminal showing Porag's build process">
+          <div class="term-head">
+            <span class="term-dot" style="background:#FF5F57"></span>
+            <span class="term-dot" style="background:#FEBC2E"></span>
+            <span class="term-dot" style="background:#28C840"></span>
+            <span class="term-title">porag@kishoreganj — ~/projects</span>
+          </div>
+          <div class="term-body" id="terminal"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TICKER ================= -->
+  <div class="ticker" data-page="home" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-item">
+        <span>HTML</span><i>✦</i><span>CSS</span><i>✦</i><span>TAILWIND</span><i>✦</i><span>JAVASCRIPT</span><i>✦</i><span>REACT</span><i>✦</i><span>WORDPRESS</span><i>✦</i><span>SHOPIFY</span><i>✦</i><span>FIGMA</span><i>✦</i><span>OPENAI</span><i>✦</i><span>FIREBASE</span><i>✦</i><span>SEO</span><i>✦</i>
+      </div>
+      <div class="ticker-item">
+        <span>HTML</span><i>✦</i><span>CSS</span><i>✦</i><span>TAILWIND</span><i>✦</i><span>JAVASCRIPT</span><i>✦</i><span>REACT</span><i>✦</i><span>WORDPRESS</span><i>✦</i><span>SHOPIFY</span><i>✦</i><span>FIGMA</span><i>✦</i><span>OPENAI</span><i>✦</i><span>FIREBASE</span><i>✦</i><span>SEO</span><i>✦</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= HOME: LIVE SPOTLIGHT ================= -->
+  <section data-page="home" class="py-16 md:py-20 border-b border-line">
+    <div class="wrap">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4" data-reveal>
+        <div>
+          <span class="kicker">Live Proof</span>
+          <h2 class="font-display font-bold text-2xl md:text-3xl mt-3">Sites live on the web right now.</h2>
+        </div>
+        <a href="#/work" class="view-btn">Explore full Work page
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 mt-8">
+        <a href="https://noyun.bolt.host" target="_blank" rel="noopener" class="card card-hover p-6 flex flex-col justify-between group" data-reveal>
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <span class="chip chip-acc">● Live Site</span>
+              <span class="font-mono text-xs text-muted">noyun.bolt.host ↗</span>
+            </div>
+            <h3 class="font-display font-semibold text-lg mt-4 group-hover:text-accent transition-colors">Noyun Coaching Center</h3>
+            <p class="text-muted text-sm mt-2 leading-relaxed">"A Brighter Future Starts Here" — Coaching center platform with academic programs &amp; admission flow.</p>
+          </div>
+          <span class="font-mono text-xs text-accent mt-5 inline-block">Open live site →</span>
+        </a>
+
+        <a href="https://dscc.bolt.host" target="_blank" rel="noopener" class="card card-hover p-6 flex flex-col justify-between group" data-reveal style="--d:.08s">
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <span class="chip chip-acc">● Live Site</span>
+              <span class="font-mono text-xs text-muted">dscc.bolt.host ↗</span>
+            </div>
+            <h3 class="font-display font-semibold text-lg mt-4 group-hover:text-accent transition-colors">Dhan Seri Coaching Center</h3>
+            <p class="text-muted text-sm mt-2 leading-relaxed">"Learn. Grow. Achieve." — Structured courses, faculty highlights &amp; mobile-first student enrollment.</p>
+          </div>
+          <span class="font-mono text-xs text-accent mt-5 inline-block">Open live site →</span>
+        </a>
+
+        <a href="https://github.com/porag2025-glitch" target="_blank" rel="noopener" class="card card-hover p-6 flex flex-col justify-between group" data-reveal style="--d:.16s">
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <span class="chip">GitHub</span>
+              <span class="font-mono text-xs text-muted">@porag2025-glitch ↗</span>
+            </div>
+            <h3 class="font-display font-semibold text-lg mt-4 group-hover:text-accent transition-colors">Code &amp; Open Source</h3>
+            <p class="text-muted text-sm mt-2 leading-relaxed">Browse my public repositories including <code class="font-mono text-xs text-accent">video-downloader-cli</code> and web builds.</p>
+          </div>
+          <span class="font-mono text-xs text-accent mt-5 inline-block">View GitHub →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services" data-page="services" class="py-20 md:py-28">
+    <div class="wrap">
+      <div data-reveal>
+        <span class="kicker">01 — Services</span>
+        <h2 class="sec-title"><span class="mask-line"><span>What I build for</span></span><span class="mask-line" style="--d:.12s"><span>small businesses.</span></span></h2>
+        <p class="sec-sub">No agency bloat, no 3-month timelines. One developer, your project, end to end — AI helps me move fast, my eye keeps it sharp.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
+        <!-- 1 -->
+        <div class="card card-hover p-6" data-reveal>
+          <div class="svc-ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h2"/></svg></div>
+          <h3 class="font-display font-semibold text-base mt-5">Landing Pages</h3>
+          <p class="text-muted text-sm mt-2.5 leading-relaxed">One page, one goal. Conversion-focused pages for offers, products and campaigns — with a WhatsApp button where your customers already live.</p>
+        </div>
+        <!-- 2 -->
+        <div class="card card-hover p-6" data-reveal style="--d:.08s">
+          <div class="svc-ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h3 class="font-display font-semibold text-base mt-5">Business Websites</h3>
+          <p class="text-muted text-sm mt-2.5 leading-relaxed">Up to 8 pages with services, gallery, booking and lead forms, Google Maps and reviews. The full professional presence your competitors don't have.</p>
+        </div>
+        <!-- 3 -->
+        <div class="card card-hover p-6" data-reveal style="--d:.16s">
+          <div class="svc-ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div>
+          <h3 class="font-display font-semibold text-base mt-5">Online Stores</h3>
+          <p class="text-muted text-sm mt-2.5 leading-relaxed">Catalog, cart, filters and a bKash / Nagad-friendly checkout flow. Orders land straight in your WhatsApp — no complex gateway setup needed.</p>
+        </div>
+        <!-- 4 -->
+        <div class="card card-hover p-6" data-reveal>
+          <div class="svc-ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 10v6"/></svg></div>
+          <h3 class="font-display font-semibold text-base mt-5">Coaching & Education</h3>
+          <p class="text-muted text-sm mt-2.5 leading-relaxed">Course lists, batch timetables, teacher profiles, admission forms and result boards — built for coaching centers that want more enrollments.</p>
+        </div>
+        <!-- 5 -->
+        <div class="card card-hover p-6" data-reveal style="--d:.08s">
+          <div class="svc-ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1M3 12h3m12 0h3M5.6 18.4l2.1-2.1m8.6-8.6 2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg></div>
+          <h3 class="font-display font-semibold text-base mt-5">AI Chatbots</h3>
+          <p class="text-muted text-sm mt-2.5 leading-relaxed">OpenAI-powered assistants on your site that answer questions, collect leads and hand off to your WhatsApp — working 24/7 while you sleep.</p>
+        </div>
+        <!-- 6 -->
+        <div class="card card-hover p-6" data-reveal style="--d:.16s">
+          <div class="svc-ico"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 1 9-9"/><path d="M12 12l4.5-4.5"/><path d="M17 21h4v-4"/></svg></div>
+          <h3 class="font-display font-semibold text-base mt-5">Speed & Local SEO</h3>
+          <p class="text-muted text-sm mt-2.5 leading-relaxed">Sub-second loads, clean hand-written code, on-page SEO and Google Business optimization — so "near me" searches find you first.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section id="work" data-page="work" class="py-20 md:py-28 bg-soft border-y border-line">
+    <div class="wrap">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6" data-reveal>
+        <div>
+          <span class="kicker">02 — Selected Work</span>
+          <h2 class="sec-title"><span class="mask-line"><span>Live client sites,</span></span><span class="mask-line" style="--d:.12s"><span>shipped &amp; running.</span></span></h2>
+        </div>
+        <p class="text-muted max-w-sm text-sm leading-relaxed md:text-right">Real deployed builds &amp; demos. Open the <span class="text-accent font-medium">live URL</span> or tap <span class="text-accent font-medium">Case study</span> for details.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mt-12">
+        <!-- Live Project 1: Noyun Coaching Center -->
+        <article class="card card-hover md:col-span-2 overflow-hidden group" data-reveal data-tilt>
+          <div class="grid md:grid-cols-2">
+            <div class="proj-img-wrap md:rounded-l-[1.1rem] aspect-[16/10] md:aspect-auto md:h-full min-h-[240px]">
+              <img src="https://images.pexels.com/photos/18506737/pexels-photo-18506737.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200" alt="Noyun Coaching Center classroom session" loading="lazy">
+              <span class="proj-badge">● LIVE · noyun.bolt.host</span>
+            </div>
+            <div class="p-6 md:p-8 flex flex-col">
+              <div class="flex items-center justify-between gap-3">
+                <span class="chip chip-acc">Coaching Center · Live</span>
+                <span class="font-mono text-xs text-muted">noyun.bolt.host</span>
+              </div>
+              <h3 class="font-display font-semibold text-xl md:text-2xl mt-4">Noyun Coaching Center</h3>
+              <p class="text-muted mt-3 leading-relaxed">"A Brighter Future Starts Here" — Full coaching institute website featuring academic programs, expert mentorship highlights, batch schedules, and a mobile-first admission inquiry flow for students and parents.</p>
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="chip">React + Tailwind</span><span class="chip">Mobile-First UI</span><span class="chip">Admission Flow</span><span class="chip">Fast SPA</span>
+              </div>
+              <div class="mt-auto pt-6 flex flex-wrap items-center gap-4">
+                <a href="https://noyun.bolt.host" target="_blank" rel="noopener" class="btn btn-wa btn-sm">
+                  Visit Live Site ↗
+                </a>
+                <button class="view-btn" data-project="noyun">Case study
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Live Project 2: Dhan Seri Coaching Center (DSCC) -->
+        <article class="card card-hover md:col-span-2 overflow-hidden group" data-reveal data-tilt>
+          <div class="grid md:grid-cols-2">
+            <div class="proj-img-wrap md:rounded-l-[1.1rem] aspect-[16/10] md:aspect-auto md:h-full min-h-[240px]">
+              <img src="https://images.pexels.com/photos/8197551/pexels-photo-8197551.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200" alt="Dhan Seri Coaching Center lecture classroom" loading="lazy">
+              <span class="proj-badge">● LIVE · dscc.bolt.host</span>
+            </div>
+            <div class="p-6 md:p-8 flex flex-col">
+              <div class="flex items-center justify-between gap-3">
+                <span class="chip chip-acc">Education · Live</span>
+                <span class="font-mono text-xs text-muted">dscc.bolt.host</span>
+              </div>
+              <h3 class="font-display font-semibold text-xl md:text-2xl mt-4">Dhan Seri Coaching Center (DSCC)</h3>
+              <p class="text-muted mt-3 leading-relaxed">"Learn. Grow. Achieve." — Clean, trustworthy digital campus for DSCC with structured course tracks, faculty profiles, student success highlights, and instant contact options.</p>
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="chip">React + Vite</span><span class="chip">Responsive Design</span><span class="chip">Course Catalog</span><span class="chip">SEO Ready</span>
+              </div>
+              <div class="mt-auto pt-6 flex flex-wrap items-center gap-4">
+                <a href="https://dscc.bolt.host" target="_blank" rel="noopener" class="btn btn-wa btn-sm">
+                  Visit Live Site ↗
+                </a>
+                <button class="view-btn" data-project="dscc">Case study
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Demo 3: E-Commerce -->
+        <article class="card card-hover overflow-hidden group" data-reveal data-tilt>
+          <div class="p-1.5 pb-0">
+            <div class="proj-img-wrap aspect-[16/10]">
+              <img src="https://images.pexels.com/photos/36730469/pexels-photo-36730469.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200" alt="Boutique owner taking an online order with laptop and phone" loading="lazy">
+              <span class="proj-badge">STORE DEMO</span>
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-3">
+              <span class="chip chip-acc">E-Commerce</span>
+              <span class="font-mono text-xs text-muted">Mini Store Concept</span>
+            </div>
+            <h3 class="font-display font-semibold text-xl mt-4">Mala Boutique Store</h3>
+            <p class="text-muted text-sm mt-2.5 leading-relaxed">Product catalog, cart, category filters and bKash / Nagad checkout where every confirmed order pings your WhatsApp.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="chip">Cart + Filters</span><span class="chip">bKash / Nagad flow</span><span class="chip">Lighthouse 98</span>
+            </div>
+            <div class="mt-auto pt-5">
+              <button class="view-btn" data-project="mala">Preview concept
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Open Source & GitHub -->
+        <article class="card card-hover overflow-hidden group" data-reveal style="--d:.1s" data-tilt>
+          <div class="p-1.5 pb-0">
+            <div class="proj-img-wrap aspect-[16/10]">
+              <img src="https://images.pexels.com/photos/7610529/pexels-photo-7610529.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200" alt="Developer laptop workspace and studio setup" loading="lazy">
+              <span class="proj-badge">OPEN SOURCE · GITHUB</span>
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-1">
+            <div class="flex items-center justify-between gap-3">
+              <span class="chip chip-acc">Personal &amp; CLI Tools</span>
+              <span class="font-mono text-xs text-muted">@porag2025-glitch</span>
+            </div>
+            <h3 class="font-display font-semibold text-xl mt-4">Open-Source &amp; Personal Builds</h3>
+            <p class="text-muted text-sm mt-2.5 leading-relaxed">Creator portfolios plus open-source utilities like <code class="font-mono text-xs text-accent">video-downloader-cli</code> — a Linux CLI tool with quality selection &amp; audio extraction.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="chip">Linux CLI</span><span class="chip">Portfolios</span><span class="chip">MIT Open Source</span>
+            </div>
+            <div class="mt-auto pt-5 flex flex-wrap items-center gap-4">
+              <a href="https://github.com/porag2025-glitch" target="_blank" rel="noopener" class="view-btn">GitHub Profile ↗</a>
+              <button class="view-btn text-muted hover:text-accent" data-project="oss">Details
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- CTA card -->
+        <a href="#/contact" class="dashed-card md:col-span-2 flex flex-col sm:flex-row items-center justify-between gap-5 p-7 md:p-8" data-reveal>
+          <div>
+            <p class="font-display font-semibold text-lg md:text-xl">Your business website goes here next.</p>
+            <p class="text-muted text-sm mt-1.5">Message me on WhatsApp (01770-884932) for a free 15-minute planning chat — no pressure.</p>
+          </div>
+          <span class="btn btn-ghost btn-sm shrink-0">Reserve a slot
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section id="process" data-page="services" class="py-20 md:py-28">
+    <div class="wrap grid lg:grid-cols-[.9fr_1.1fr] gap-12 lg:gap-20">
+      <div class="lg:sticky lg:top-28 self-start" data-reveal>
+        <span class="kicker">03 — Process</span>
+        <h2 class="sec-title"><span class="mask-line"><span>From hello to live,</span></span><span class="mask-line" style="--d:.12s"><span>in one week.</span></span></h2>
+        <p class="sec-sub">No endless meetings, no 40-slide decks. We talk on WhatsApp, you watch the build happen, and your site goes live before the tea cools.</p>
+        <div class="card p-5 mt-8 max-w-sm border-l-2 border-l-accent!">
+          <p class="font-mono text-xs tracking-[.14em] text-accent uppercase">Guarantee</p>
+          <p class="text-sm text-muted mt-2 leading-relaxed">If you don't like the design after the first revision round, your advance is <strong class="text-ink">100% refunded</strong>. That's it. That's the risk.</p>
+        </div>
+      </div>
+
+      <ol class="pt-2">
+        <li class="step" data-reveal>
+          <span class="step-num">01</span>
+          <p class="step-day">DAY 0</p>
+          <h3 class="font-display font-semibold text-lg mt-1.5">The Chat</h3>
+          <p class="text-muted mt-2 leading-relaxed">A free 15-minute WhatsApp call. I learn your business, your customers and what "success" looks like for you. You get a fixed quote the same day.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.08s">
+          <span class="step-num">02</span>
+          <p class="step-day">DAY 1–2</p>
+          <h3 class="font-display font-semibold text-lg mt-1.5">The Look</h3>
+          <p class="text-muted mt-2 leading-relaxed">I design mobile-first and send you live preview links on your own phone. You approve every screen before a single line of production code is written.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.16s">
+          <span class="step-num">03</span>
+          <p class="step-day">DAY 3–5</p>
+          <h3 class="font-display font-semibold text-lg mt-1.5">The Build</h3>
+          <p class="text-muted mt-2 leading-relaxed">AI helps me move at 10× speed; I hand-check every pixel. Speed-tested, SEO-ready, and tested on 20+ real devices and browsers before it ships.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.24s">
+          <span class="step-num">04</span>
+          <p class="step-day">DAY 6+</p>
+          <h3 class="font-display font-semibold text-lg mt-1.5">Launch & Care</h3>
+          <p class="text-muted mt-2 leading-relaxed">Deployed, connected to your WhatsApp number, Google verified. Plus 30 days of free fixes and a 30-minute training video so you can update it yourself.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= PRICING ================= -->
+  <section id="pricing" data-page="pricing" class="py-20 md:py-28 bg-soft border-y border-line">
+    <div class="wrap">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6" data-reveal>
+        <div>
+          <span class="kicker">04 — Packages</span>
+          <h2 class="sec-title"><span class="mask-line"><span>Affordable by design,</span></span><span class="mask-line" style="--d:.12s"><span>not by accident.</span></span></h2>
+          <p class="sec-sub">Most projects land between <strong class="text-ink">3,000–5,000 BDT ($30–50)</strong>. 50% advance to start, 50% when your site goes live.</p>
+        </div>
+        <div class="flex items-center gap-2 p-1 border border-line rounded-full bg-card" role="group" aria-label="Currency">
+          <button class="cur-btn active" data-cur="bdt">৳ BDT</button>
+          <button class="cur-btn" data-cur="usd">$ USD</button>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-14 lg:gap-7 items-stretch">
+        <!-- Starter -->
+        <div class="card card-hover price-card relative p-7 flex flex-col" data-reveal>
+          <p class="font-mono text-xs tracking-[.2em] text-muted uppercase">Starter</p>
+          <p class="text-sm text-muted mt-2">For launching an offer or idea fast.</p>
+          <div class="mt-5 flex items-end gap-2">
+            <span class="font-display text-accent text-xl mb-1.5">৳</span>
+            <span class="price-amount" data-bdt="3,000" data-usd="$30">3,000</span>
+            <span class="text-muted text-sm mb-1.5">one-time</span>
+          </div>
+          <ul class="mt-6 space-y-3 flex-1">
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>1 high-converting page</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mobile-first responsive design</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>WhatsApp button + contact form</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Basic on-page SEO</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>3-day delivery · 1 revision</li>
+          </ul>
+          <a class="btn btn-ghost mt-8 w-full" data-wa="Hi Porag! I want to book the STARTER package (3,000 BDT / $30). Please share the next steps.">Order on WhatsApp</a>
+        </div>
+
+        <!-- Business (popular) -->
+        <div class="card card-hover price-card popular relative p-7 flex flex-col lg:scale-[1.04]" data-reveal style="--d:.08s">
+          <span class="badge-pop">★ MOST BOOKED</span>
+          <p class="font-mono text-xs tracking-[.2em] text-accent uppercase">Business</p>
+          <p class="text-sm text-muted mt-2">The full presence for shops & services.</p>
+          <div class="mt-5 flex items-end gap-2">
+            <span class="font-display text-accent text-xl mb-1.5">৳</span>
+            <span class="price-amount" data-bdt="4,000" data-usd="$40">4,000</span>
+            <span class="text-muted text-sm mb-1.5">one-time</span>
+          </div>
+          <ul class="mt-6 space-y-3 flex-1">
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong class="text-ink font-semibold">Everything in Starter</strong>, plus —</span></li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Up to 5 pages</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Services + gallery sections</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Booking / lead form + Google Maps</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Speed + local SEO optimization</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>5-day delivery · 2 revisions + 30-day support</li>
+          </ul>
+          <a class="btn btn-wa mt-8 w-full" data-wa="Hi Porag! I want to book the BUSINESS package (4,000 BDT / $40). Please share the next steps.">Order on WhatsApp</a>
+        </div>
+
+        <!-- Store -->
+        <div class="card card-hover price-card relative p-7 flex flex-col" data-reveal style="--d:.16s">
+          <p class="font-mono text-xs tracking-[.2em] text-muted uppercase">Store</p>
+          <p class="text-sm text-muted mt-2">Sell online with a mini shop.</p>
+          <div class="mt-5 flex items-end gap-2">
+            <span class="font-display text-accent text-xl mb-1.5">৳</span>
+            <span class="price-amount" data-bdt="5,000" data-usd="$50">5,000</span>
+            <span class="text-muted text-sm mb-1.5">one-time</span>
+          </div>
+          <ul class="mt-6 space-y-3 flex-1">
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong class="text-ink font-semibold">Everything in Business</strong>, plus —</span></li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Up to 8 pages or mini store (10 products)</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Cart + bKash / Nagad order flow</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>AI chatbot (basic, 24/7)</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Analytics + blog-ready structure</li>
+            <li class="feat"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>7-day delivery · priority 60-day support</li>
+          </ul>
+          <a class="btn btn-ghost mt-8 w-full" data-wa="Hi Porag! I want to book the STORE package (5,000 BDT / $50). Please share the next steps.">Order on WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- add-ons -->
+      <div class="card p-6 md:p-8 mt-10 grid md:grid-cols-2 gap-x-10" data-reveal>
+        <div class="flex items-center gap-3 mb-4">
+          <svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          <h3 class="font-display font-semibold">Need something extra? Add-ons</h3>
+        </div>
+        <div>
+          <div class="addon"><span>Extra page</span><b class="price-amount" data-bdt="+৳300" data-usd="+$3">+৳300</b></div>
+          <div class="addon"><span>Extra product listing</span><b class="price-amount" data-bdt="+৳100" data-usd="+$1">+৳100</b></div>
+          <div class="addon"><span>Logo design (2 concepts)</span><b class="price-amount" data-bdt="+৳500" data-usd="+$5">+৳500</b></div>
+          <div class="addon"><span>Domain + email setup help</span><b class="price-amount" data-bdt="+৳200" data-usd="+$2">+৳200</b></div>
+          <div class="addon" style="border-bottom:0"><span>Monthly care plan</span><b class="price-amount" data-bdt="৳500/mo" data-usd="$5/mo">৳500/mo</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section id="reviews" data-page="home" class="py-20 md:py-28">
+    <div class="wrap">
+      <div data-reveal>
+        <span class="kicker">05 — Word on the street</span>
+        <h2 class="sec-title"><span class="mask-line"><span>Clients who stopped</span></span><span class="mask-line" style="--d:.12s"><span>saying "we have no website".</span></span></h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <figure class="card card-hover tst p-7" style="--rot:-1.4deg" data-reveal>
+          <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <blockquote class="mt-4 leading-relaxed text-[.97rem]">"Porag built our coaching center site fast and clean. Parents now check batches on their phones and message us directly — <strong class="text-ink">student inquiries jumped right away</strong>."</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="tst-ava">NC</span>
+            <div>
+              <p class="font-semibold text-sm">Noyun Coaching Team</p>
+              <p class="text-muted text-xs">noyun.bolt.host</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="card card-hover tst p-7 md:mt-6" style="--rot:1.1deg" data-reveal data-tilt>
+          <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <blockquote class="mt-4 leading-relaxed text-[.97rem]">"We wanted a modern site for Dhan Seri Coaching Center without agency prices. Porag delivered <strong class="text-ink">exactly what our students needed</strong> within days."</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="tst-ava">DS</span>
+            <div>
+              <p class="font-semibold text-sm">DSCC Faculty</p>
+              <p class="text-muted text-xs">Dhan Seri Coaching Center · dscc.bolt.host</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="card card-hover tst p-7" style="--rot:-.8deg" data-reveal>
+          <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <blockquote class="mt-4 leading-relaxed text-[.97rem]">"Fast, patient, and honestly the easiest project I've ever had. My portfolio gets a compliment every single week — <strong class="text-ink">three weddings booked</strong> from it already."</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="tst-ava">AR</span>
+            <div>
+              <p class="font-semibold text-sm">Ayesha Rahman</p>
+              <p class="text-muted text-xs">Wedding Photographer</p>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq" data-page="pricing" class="py-20 md:py-28 bg-soft border-y border-line">
+    <div class="wrap grid lg:grid-cols-[.85fr_1.15fr] gap-12">
+      <div class="lg:sticky lg:top-28 self-start" data-reveal>
+        <span class="kicker">06 — FAQ</span>
+        <h2 class="sec-title"><span class="mask-line"><span>Questions people</span></span><span class="mask-line" style="--d:.12s"><span>ask before ordering.</span></span></h2>
+        <p class="sec-sub">Something else on your mind? It takes me about one message to answer it.</p>
+        <a class="btn btn-wa btn-sm mt-7" data-wa="Hi Porag! I have a question before booking a website.">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Ask me directly
+        </a>
+      </div>
+
+      <div class="space-y-4">
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" aria-expanded="false">How much does a website cost?
+            <span class="plus"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+          <div class="faq-a"><div><p>Most projects fall between <strong class="text-ink">3,000 and 5,000 BDT (about $30–50)</strong> depending on scope. You get a fixed quote after a free 15-minute chat — the price never changes mid-project, and it's 50/50 split: half to start, half on launch.</p></div></div>
+        </div>
+
+        <div class="faq-item" data-reveal style="--d:.05s">
+          <button class="faq-q" aria-expanded="false">How fast can you launch my site?
+            <span class="plus"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+          <div class="faq-a"><div><p>A single landing page in <strong class="text-ink">3 days</strong>, a business site in <strong class="text-ink">5 days</strong>, a mini store in <strong class="text-ink">7 days</strong>. We start the day your advance lands — most clients are live before the following week ends.</p></div></div>
+        </div>
+
+        <div class="faq-item" data-reveal style="--d:.1s">
+          <button class="faq-q" aria-expanded="false">Can I update the site myself later?
+            <span class="plus"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+          <div class="faq-a"><div><p>Yes. Every build ships with a simple written guide and a 30-minute screen-recorded training video. If you'd rather never touch it, the <strong class="text-ink">৳500/month care plan</strong> covers updates, backups and small changes.</p></div></div>
+        </div>
+
+        <div class="faq-item" data-reveal style="--d:.15s">
+          <button class="faq-q" aria-expanded="false">What do I need to get started?
+            <span class="plus"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+          <div class="faq-a"><div><p>Your logo (if you have one), photos or product shots, and your WhatsApp number. Missing copy, photos or a logo? I can write the content with you and design a logo as an add-on — most small businesses start with almost nothing and it's fine.</p></div></div>
+        </div>
+
+        <div class="faq-item" data-reveal style="--d:.2s">
+          <button class="faq-q" aria-expanded="false">What if I don't like the design?
+            <span class="plus"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </button>
+          <div class="faq-a"><div><p>You approve the design preview <strong class="text-ink">before</strong> the build, and each package includes 1–3 revision rounds. If after the first round it's simply not for you, your advance is refunded in full. I'd rather lose a 50% deposit than keep a client I've disappointed.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" data-page="contact" class="py-20 md:py-28">
+    <div class="wrap">
+      <div class="relative card overflow-hidden p-7 md:p-12 lg:p-16" data-reveal>
+        <div class="contact-glow" aria-hidden="true"></div>
+        <div class="relative grid lg:grid-cols-2 gap-10 lg:gap-16">
+          <!-- left -->
+          <div>
+            <span class="kicker">07 — Contact</span>
+            <h2 class="sec-title"><span class="mask-line"><span>Got an idea?</span></span><span class="mask-line" style="--d:.12s"><span class="text-accent">Let's ship it.</span></span></h2>
+            <p class="sec-sub">No forms that vanish into a void. Message or call me directly — I usually reply within the hour (10 AM – 10 PM, BD time).</p>
+
+            <div class="mt-9 space-y-5">
+              <a class="flex items-center gap-4 group" data-wa="Hi Porag! I want to start a website project.">
+                <span class="w-11 h-11 rounded-xl grid place-items-center bg-soft border border-line text-accent group-hover:border-accent transition-colors shrink-0">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                </span>
+                <span>
+                  <span class="block font-mono text-xs text-muted tracking-wider">WHATSAPP · replies in ~1 hour</span>
+                  <span class="block font-semibold mt-0.5 group-hover:text-accent transition-colors">01770-884932 (+880 1770-884932)</span>
+                </span>
+              </a>
+              <a class="flex items-center gap-4 group" href="tel:+8801770884932">
+                <span class="w-11 h-11 rounded-xl grid place-items-center bg-soft border border-line text-accent group-hover:border-accent transition-colors shrink-0">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </span>
+                <span>
+                  <span class="block font-mono text-xs text-muted tracking-wider">DIRECT CALL · tap to dial</span>
+                  <span class="block font-semibold mt-0.5 group-hover:text-accent transition-colors">01770884932</span>
+                </span>
+              </a>
+              <a class="flex items-center gap-4 group" href="mailto:porag2025@proton.me">
+                <span class="w-11 h-11 rounded-xl grid place-items-center bg-soft border border-line text-accent group-hover:border-accent transition-colors shrink-0">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                </span>
+                <span>
+                  <span class="block font-mono text-xs text-muted tracking-wider">EMAIL · Proton Mail</span>
+                  <span class="block font-semibold mt-0.5 group-hover:text-accent transition-colors">porag2025@proton.me</span>
+                </span>
+              </a>
+              <a class="flex items-center gap-4 group" href="https://github.com/porag2025-glitch" target="_blank" rel="noopener">
+                <span class="w-11 h-11 rounded-xl grid place-items-center bg-soft border border-line text-accent group-hover:border-accent transition-colors shrink-0">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+                </span>
+                <span>
+                  <span class="block font-mono text-xs text-muted tracking-wider">GITHUB · code &amp; open source</span>
+                  <span class="block font-semibold mt-0.5 group-hover:text-accent transition-colors">github.com/porag2025-glitch ↗</span>
+                </span>
+              </a>
+              <div class="flex items-center gap-4">
+                <span class="w-11 h-11 rounded-xl grid place-items-center bg-soft border border-line text-accent shrink-0">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                <span>
+                  <span class="block font-mono text-xs text-muted tracking-wider">ADDRESS</span>
+                  <span class="block font-semibold mt-0.5">Pakundia, Kishoreganj, Bangladesh · GMT+6</span>
+                </span>
+              </div>
+            </div>
+
+            <a class="btn btn-wa mt-10" data-wa="Hi Porag! Let's chat about my website. Here's a quick summary: ">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Chat with Porag now
+            </a>
+          </div>
+
+          <!-- right: form -->
+          <form id="contactForm" class="card bg-soft p-6 md:p-8" novalidate>
+            <p class="font-mono text-xs tracking-[.18em] text-accent uppercase mb-6">Or send a quick brief ↓ (opens WhatsApp)</p>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="f-name" class="block text-sm font-medium mb-1.5">Your name</label>
+                <input id="f-name" class="field" type="text" placeholder="e.g. Tanvir Ahmed" required>
+              </div>
+              <div>
+                <label for="f-biz" class="block text-sm font-medium mb-1.5">Business type</label>
+                <select id="f-biz" class="field">
+                  <option>Coaching center</option>
+                  <option>Shop / online store</option>
+                  <option>Restaurant / café</option>
+                  <option>Personal brand / portfolio</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label for="f-msg" class="block text-sm font-medium mb-1.5">What do you need?</label>
+              <textarea id="f-msg" class="field" rows="4" placeholder="e.g. A 5-page site for my coaching center with course list and admission form. Ideally live before March."></textarea>
+            </div>
+            <button type="submit" class="btn btn-wa w-full mt-6">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Send via WhatsApp
+            </button>
+            <p class="text-xs text-muted mt-3 text-center">No email needed — your message opens straight in WhatsApp chat.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="border-t border-line bg-soft">
+  <div class="wrap py-12 grid md:grid-cols-[1.3fr_1fr_1fr] gap-10">
+    <div>
+      <a href="#/home" class="font-display font-bold text-xl tracking-tight">Porag<span class="text-accent">43</span><span class="logo-cursor" aria-hidden="true"></span></a>
+      <p class="text-muted text-sm mt-4 max-w-xs leading-relaxed">AI-assisted web development for small businesses. Fast builds, honest taka, and a WhatsApp line that actually answers.</p>
+      <div class="flex items-center gap-2 mt-5">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span class="font-mono text-xs text-muted tracking-wider">AVAILABLE FOR NEW PROJECTS</span>
+      </div>
+    </div>
+    <nav aria-label="Footer">
+      <p class="font-mono text-xs tracking-[.2em] text-muted uppercase mb-4">Navigate</p>
+      <ul class="space-y-2.5 text-sm">
+        <li><a class="nav-link" href="#/home">Home</a></li>
+        <li><a class="nav-link" href="#/services">Services</a></li>
+        <li><a class="nav-link" href="#/work">Work</a></li>
+        <li><a class="nav-link" href="#/pricing">Pricing</a></li>
+        <li><a class="nav-link" href="#/contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="font-mono text-xs tracking-[.2em] text-muted uppercase mb-4">Links &amp; Direct</p>
+      <ul class="space-y-2.5 text-sm">
+        <li><a class="nav-link" href="https://github.com/porag2025-glitch" target="_blank" rel="noopener">GitHub (@porag2025-glitch) ↗</a></li>
+        <li><a class="nav-link" href="https://noyun.bolt.host" target="_blank" rel="noopener">Noyun Coaching (Live) ↗</a></li>
+        <li><a class="nav-link" href="https://dscc.bolt.host" target="_blank" rel="noopener">DSCC Coaching (Live) ↗</a></li>
+        <li><a class="nav-link" href="mailto:porag2025@proton.me">porag2025@proton.me</a></li>
+        <li><a class="nav-link" data-wa="Hi Porag! Reaching out from your Porag43 portfolio.">WhatsApp: 01770-884932 ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-line">
+    <div class="wrap py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p class="font-mono text-xs text-muted">© <span id="year">2026</span> Porag43 — Pakundia, Kishoreganj, BD.</p>
+      <p class="font-mono text-xs text-muted">Made with too much cha in Pakundia, Kishoreganj <span class="text-accent">✦</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= MODAL ================= -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Case study">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <button class="modal-x" data-close aria-label="Close case study">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<button id="toTop" aria-label="Back to top">
+  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+</button>
+
+<script>
+(function(){
+'use strict';
+var WA_NUMBER = '8801770884932';
+var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function waLink(msg){ return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg); }
+
+/* ---------- static WhatsApp links ---------- */
+document.querySelectorAll('[data-wa]').forEach(function(el){
+  el.setAttribute('href', waLink(el.getAttribute('data-wa') || ''));
+  el.setAttribute('target', '_blank');
+  el.setAttribute('rel', 'noopener');
+});
+
+/* ---------- theme toggle ---------- */
+var themeBtn = document.getElementById('themeToggle');
+themeBtn.addEventListener('click', function(){
+  var cur = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try{ localStorage.setItem('p43-theme', next); }catch(e){}
+});
+
+/* ---------- mobile menu ---------- */
+var menuBtn = document.getElementById('menuBtn');
+var mobileNav = document.getElementById('mobileNav');
+menuBtn.addEventListener('click', function(){
+  var open = mobileNav.classList.toggle('open');
+  menuBtn.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', open);
+});
+mobileNav.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click', function(){
+    mobileNav.classList.remove('open');
+    menuBtn.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded','false');
+  });
+});
+
+/* ---------- header + progress + toTop ---------- */
+var header = document.getElementById('header');
+var progress = document.getElementById('progress');
+var toTop = document.getElementById('toTop');
+function onScroll(){
+  var h = document.documentElement;
+  var max = h.scrollHeight - h.clientHeight;
+  progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  header.classList.toggle('scrolled', h.scrollTop > 12);
+  toTop.classList.toggle('show', h.scrollTop > 620);
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+toTop.addEventListener('click', function(){ window.scrollTo({ top:0, behavior: RM ? 'auto' : 'smooth' }); });
+
+/* ---------- scramble-decode headline ---------- */
+var GLYPHS = '█▓▒░<>/\\|=+*#_';
+function scramble(el, done){
+  var finalText = el.getAttribute('data-scramble');
+  if (RM){ el.textContent = finalText; if (done) done(); return; }
+  var i = 0, len = finalText.length;
+  var per = 1 + Math.floor(len / 12);
+  var timer = setInterval(function(){
+    i += per;
+    var out = '';
+    for (var j = 0; j < len; j++){
+      if (j < i) out += finalText[j];
+      else if (finalText[j] === ' ') out += ' ';
+      else out += GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+    }
+    el.textContent = out;
+    if (i >= len){ clearInterval(timer); el.textContent = finalText; if (done) done(); }
+  }, 42);
+}
+var lines = document.querySelectorAll('h1 .scr');
+if (lines.length){
+  setTimeout(function(){
+    scramble(lines[0], function(){
+      scramble(lines[1], function(){ scramble(lines[2]); });
+    });
+  }, 250);
+}
+
+/* ---------- terminal typing ---------- */
+var TERM_LINES = [
+  { html:'porag --deploy "noyun-coaching"', cls:'t-cmd', type:true },
+  { html:'▸ reading brief ............... <b>done</b>', cls:'t-ok' },
+  { html:'▸ generating layout (AI) ...... <b>done</b>', cls:'t-ok' },
+  { html:'▸ hand-refining design ........ <b>done</b>', cls:'t-ok' },
+  { html:'▸ building + mobile QA ........ <b>100%</b>', cls:'t-ok' },
+  { html:'▸ lighthouse audit ............ <b>98/100</b>', cls:'t-hl' },
+  { html:'▸ deploying noyun.bolt.host ... <b>live ✓</b>', cls:'t-live' },
+  { html:'→ also live: dscc.bolt.host · WhatsApp 01770-884932', cls:'t-out' }
+];
+var termEl = document.getElementById('terminal');
+function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+async function runTerminal(){
+  if (!termEl) return;
+  if (RM){
+    termEl.innerHTML = TERM_LINES.map(function(l){
+      return '<div class="' + l.cls + '">' + l.html + '</div>';
+    }).join('');
+    return;
+  }
+  while (true){
+    termEl.innerHTML = '';
+    for (var i = 0; i < TERM_LINES.length; i++){
+      var line = TERM_LINES[i];
+      var div = document.createElement('div');
+      div.className = line.cls;
+      var cursor = document.createElement('span');
+      cursor.className = 't-cursor';
+      div.appendChild(cursor);
+      termEl.appendChild(div);
+      if (line.type){
+        var plain = line.html;
+        for (var c = 0; c <= plain.length; c++){
+          cursor.insertAdjacentText('beforebegin', plain.charAt(c));
+          await sleep(34);
+        }
+        await sleep(320);
+      } else {
+        div.innerHTML = line.html;
+        div.appendChild(cursor);
+        await sleep(260 + Math.random() * 240);
+      }
+      if (i < TERM_LINES.length - 1) cursor.remove();
+    }
+    await sleep(4200);
+    termEl.innerHTML = '';
+    await sleep(400);
+  }
+}
+runTerminal();
+
+/* ---------- reveal on scroll ---------- */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if (e.isIntersecting){
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+
+/* ---------- counters ---------- */
+function animateCount(el){
+  var target = parseFloat(el.getAttribute('data-count'));
+  var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+  var suf = el.getAttribute('data-suffix') || '';
+  if (RM){ el.textContent = target.toFixed(dec) + suf; return; }
+  var dur = 1500, t0 = null;
+  function step(t){
+    if (!t0) t0 = t;
+    var p = Math.min(1, (t - t0) / dur);
+    var eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = (target * eased).toFixed(dec) + suf;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+var cio = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if (e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+/* ---------- card tilt ---------- */
+if (!RM && window.matchMedia('(pointer: fine)').matches){
+  document.querySelectorAll('[data-tilt]').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(950px) rotateX(' + (-y * 4).toFixed(2) + 'deg) rotateY(' + (x * 5).toFixed(2) + 'deg) translateY(-4px)';
+    });
+    card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
+  });
+}
+
+/* ---------- currency toggle ---------- */
+var curBtns = document.querySelectorAll('.cur-btn');
+curBtns.forEach(function(btn){
+  btn.addEventListener('click', function(){
+    if (btn.classList.contains('active')) return;
+    curBtns.forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var cur = btn.getAttribute('data-cur');
+    document.querySelectorAll('.price-amount').forEach(function(el){
+      var next = cur === 'usd' ? el.getAttribute('data-usd') : el.getAttribute('data-bdt');
+      if (next === el.textContent) return;
+      el.textContent = next;
+      el.classList.remove('flip');
+      void el.offsetWidth;
+      el.classList.add('flip');
+    });
+    var curSym = document.querySelectorAll('.font-display.text-accent.text-xl');
+    curSym.forEach(function(s){ s.textContent = cur === 'usd' ? '$' : '৳'; });
+  });
+});
+
+/* ---------- FAQ accordion ---------- */
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var item = btn.parentElement;
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(o){
+      o.classList.remove('open');
+      o.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!wasOpen){
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ---------- case study modal ---------- */
+var PROJECTS = {
+  noyun: {
+    title: 'Noyun Coaching Center', cat: 'Live Coaching Site', year: 'LIVE · noyun.bolt.host',
+    url: 'https://noyun.bolt.host', urlLabel: 'Visit noyun.bolt.host ↗',
+    img: 'https://images.pexels.com/photos/18506737/pexels-photo-18506737.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
+    desc: '"A Brighter Future Starts Here" — A modern coaching institute web platform built for Noyun Coaching Center. Designed mobile-first so students and parents can explore courses, mentorship highlights, batch schedules, and reach out for admission in seconds.',
+    outcomes: ['Live production deployment at noyun.bolt.host', 'Mobile-first layout tailored for students & parents', 'Clear program cards, mentorship highlights & CTA flow', 'Fast SPA performance with emerald brand identity'],
+    stack: ['React', 'Tailwind CSS', 'Responsive UI', 'Admission CTA'],
+    price: 'Business Package · 4,000 BDT / $40'
+  },
+  dscc: {
+    title: 'Dhan Seri Coaching Center (DSCC)', cat: 'Live Education Site', year: 'LIVE · dscc.bolt.host',
+    url: 'https://dscc.bolt.host', urlLabel: 'Visit dscc.bolt.host ↗',
+    img: 'https://images.pexels.com/photos/8197551/pexels-photo-8197551.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
+    desc: '"Learn. Grow. Achieve." — Official web presence for Dhan Seri Coaching Center (DSCC). Presents academic batches, structured learning tracks, faculty guidance, and quick enrollment contact in a crisp navy-and-light interface.',
+    outcomes: ['Live at dscc.bolt.host with instant page transitions', 'Structured course & batch overview for prospective students', 'Clean academic branding (#123552) built for trust', 'Optimized for low-bandwidth mobile browsing in Bangladesh'],
+    stack: ['React + Vite', 'Tailwind CSS', 'Academic Branding', 'Mobile UX'],
+    price: 'Business Package · 4,000 BDT / $40'
+  },
+  mala: {
+    title: 'Mala Boutique — Store Concept', cat: 'E-Commerce Demo', year: 'Demo · Mini Store',
+    img: 'https://images.pexels.com/photos/36730469/pexels-photo-36730469.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
+    desc: 'A lightweight online store blueprint for Bangladeshi boutiques and F-commerce sellers: product catalog, category filters, cart drawer, and a bKash / Nagad checkout flow where every order lands directly on the owner’s WhatsApp.',
+    outcomes: ['Zero payment-gateway headache for small shops', 'Orders arrive formatted with item, size & address on WhatsApp', 'Lighthouse 98 performance on mobile data', 'Easy product updates without technical skills'],
+    stack: ['Cart + Filters', 'bKash / Nagad flow', 'WhatsApp order sync', 'Fast images'],
+    price: 'Store Package · 5,000 BDT / $50'
+  },
+  oss: {
+    title: 'Open-Source & Developer Builds', cat: 'GitHub · @porag2025-glitch', year: 'Open Source · MIT',
+    url: 'https://github.com/porag2025-glitch/video-downloader-cli', urlLabel: 'View on GitHub ↗',
+    img: 'https://images.pexels.com/photos/7610529/pexels-photo-7610529.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
+    desc: 'Alongside client websites, I build open-source tools and sleek personal portfolios — including video-downloader-cli, a Linux command-line downloader for YouTube, TikTok, and Facebook featuring quality selection, audio extraction, and advanced controls.',
+    outcomes: ['Public MIT-licensed code on github.com/porag2025-glitch', 'Clean Linux CLI workflow with audio & quality controls', 'Same engineering discipline applied to every client site', 'Sub-second static & SPA personal brand templates'],
+    stack: ['Linux CLI', 'JavaScript / Shell', 'GitHub Open Source', 'Portfolio UI'],
+    price: 'Starter Package · 3,000 BDT / $30'
+  }
+};
+var modal = document.getElementById('modal');
+var modalBody = document.getElementById('modalBody');
+function openCase(id){
+  var p = PROJECTS[id];
+  if (!p) return;
+  var liveBtn = p.url
+    ? '<a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="' + p.url + '">' + (p.urlLabel || 'Visit Live Site ↗') + '</a>'
+    : '';
+  modalBody.innerHTML =
+    '<div class="grid md:grid-cols-[.9fr_1.1fr]">' +
+      '<div class="relative h-56 md:h-auto">' +
+        '<img src="' + p.img + '" alt="' + p.title + '" class="absolute inset-0 w-full h-full object-cover md:rounded-l-[1.2rem]">' +
+        '<span class="proj-badge">' + p.cat.toUpperCase() + '</span>' +
+      '</div>' +
+      '<div class="p-6 md:p-8">' +
+        '<p class="font-mono text-xs text-muted tracking-[.16em]">' + p.year + '</p>' +
+        '<h3 class="font-display font-bold text-xl md:text-2xl mt-2">' + p.title + '</h3>' +
+        '<p class="text-muted text-sm leading-relaxed mt-3">' + p.desc + '</p>' +
+        '<p class="font-mono text-[.7rem] tracking-[.2em] text-accent uppercase mt-6 mb-3">Highlights</p>' +
+        '<ul class="space-y-2 text-sm">' +
+          p.outcomes.map(function(o){
+            return '<li class="flex gap-2.5 items-start"><span class="text-accent mt-0.5">▸</span><span class="text-muted"><strong class="text-ink font-medium">' + o.split(',')[0] + '</strong>' + (o.indexOf(',') > -1 ? o.substring(o.indexOf(',') + 1) : '') + '</span></li>';
+          }).join('') +
+        '</ul>' +
+        '<div class="flex flex-wrap gap-2 mt-6">' +
+          p.stack.map(function(s){ return '<span class="chip">' + s + '</span>'; }).join('') +
+        '</div>' +
+        '<div class="flex flex-wrap items-center gap-3 mt-7 pt-6 border-t border-line">' +
+          '<span class="font-mono text-xs text-muted mr-auto">' + p.price + '</span>' +
+          liveBtn +
+          '<a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="' + waLink('Hi Porag! I checked out ' + p.title + ' on your portfolio and want something similar for my business.') + '">Build similar</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('[data-project]').forEach(function(btn){
+  btn.addEventListener('click', function(){ openCase(btn.getAttribute('data-project')); });
+});
+modal.querySelectorAll('[data-close]').forEach(function(el){
+  el.addEventListener('click', closeModal);
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+});
+
+/* ---------- contact form -> WhatsApp ---------- */
+var form = document.getElementById('contactForm');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('f-name').value.trim();
+  var biz = document.getElementById('f-biz').value;
+  var msg = document.getElementById('f-msg').value.trim();
+  if (!name){ document.getElementById('f-name').focus(); return; }
+  var text = 'Hi Porag! I\'m ' + name + ' (' + biz + ').\n' +
+             (msg ? 'What I need: ' + msg + '\n' : '') +
+             'I\'d love a fixed quote and a free 15-min chat. Thanks!';
+  window.open(waLink(text), '_blank', 'noopener');
+});
+
+/* ---------- one-file multi-page router ---------- */
+var PAGES = ['home','services','work','pricing','contact'];
+var TITLES = {
+  home:'Porag43 — AI & Web Developer | Fast, Affordable Websites',
+  services:'Services & Process — Porag43',
+  work:'Selected Work — Porag43',
+  pricing:'Packages & Pricing — Porag43',
+  contact:'Contact — Porag43'
+};
+var wipe = document.getElementById('wipe');
+var crumb = document.getElementById('crumb');
+
+function routeName(){
+  var h = (location.hash || '').replace(/^#\/?/, '').split('?')[0];
+  return PAGES.indexOf(h) > -1 ? h : 'home';
+}
+
+function render(name, animate){
+  var sections = document.querySelectorAll('[data-page]');
+  function swap(){
+    sections.forEach(function(s){
+      s.style.display = (s.getAttribute('data-page') === name) ? '' : 'none';
+    });
+    document.title = TITLES[name] || TITLES.home;
+    if (crumb) crumb.textContent = '~/' + name;
+    document.querySelectorAll('a[href^="#/"]').forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#/' + name);
+    });
+    // re-run entrance animation on the incoming page
+    if (!RM){
+      document.querySelectorAll('[data-page="' + name + '"]').forEach(function(host){
+        host.classList.remove('page-in');
+        void host.offsetWidth;
+        host.classList.add('page-in');
+      });
+    }
+    window.scrollTo(0, 0);
+    if (typeof onScroll === 'function') onScroll();
+    // reveal anything already in the viewport of the new page
+    requestAnimationFrame(function(){
+      document.querySelectorAll('[data-page="' + name + '"] [data-reveal]:not(.is-in)').forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight - 40) el.classList.add('is-in');
+      });
+    });
+  }
+
+  if (animate && !RM && wipe){
+    wipe.classList.add('on');
+    setTimeout(function(){
+      swap();
+      wipe.classList.remove('on');
+    }, 300);
+  } else {
+    swap();
+  }
+}
+
+render(routeName(), false);
+window.addEventListener('hashchange', function(){ render(routeName(), true); });
+
+/* ---------- footer year ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
